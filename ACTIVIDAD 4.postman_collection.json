@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "7c31dd92-48d1-4d1f-a02a-044501711783",
+		"name": "ACTIVIDAD 4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23204180"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8000/api/users",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Maur Exampel\",\n  \"email\": \"maur.exampel@email.com\",\n  \"password\": \"Weekend475758\",\n  \"bio\": \"Your bio (optional)\"\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users"
+					]
+				},
+				"description": "POST /api/users\n- No necesita estar autenticada\n- Recibe body JSON con los campos name, email, password y bio\n- Almacena el usuario en Base de Datos en memoria cifrando su contraseña"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"maur.exampel@email.com\",\n  \"password\": \"Weekend475758\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"login"
+					]
+				},
+				"description": "2. POST /api/login\n- Recibe body con email, password\n- Devuelve HTTP 200 OK con token JWT de sesión si las credenciales son correctas\n- Devuelve HTTP 400 en caso de error en la validación de datos\n- Devuelve HTTP 401 si las credenciales no son correctas"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/activate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hdXIuZXhhbXBlbEBlbWFpbC5jb20iLCJpYXQiOjE2OTczMzcwNzAsImV4cCI6MTY5NzQyMzQ3MH0.lNBasR7dLbLT65-5R8G9uVtmxXFj2u9ZMQSMC6zKpco",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/activate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hdXIuZXhhbXBlbEBlbWFpbC5jb20iLCJpYXQiOjE2OTczMzcwNzAsImV4cCI6MTY5NzQyMzQ3MH0.lNBasR7dLbLT65-5R8G9uVtmxXFj2u9ZMQSMC6zKpco",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"activate",
+						"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hdXIuZXhhbXBlbEBlbWFpbC5jb20iLCJpYXQiOjE2OTczMzcwNzAsImV4cCI6MTY5NzQyMzQ3MH0.lNBasR7dLbLT65-5R8G9uVtmxXFj2u9ZMQSMC6zKpco"
+					]
+				},
+				"description": "Confirmación de registro\nTras crear un usuario (POST /api/users) éste se creara con el campo active: false. El servidor enviará un email a la dirección de correo de registro compartiendo una URL con la que el usuario que reciba el correo pueda hacer GET para modificar el campo \"active\" de su cuenta a valor \"true\".\nNOTA: no es necesario enviar un email. El enlace de validación de cuenta puede ser accedido sin necesidad de enviar un email.\nSolo usuarios con el campo active == true podrán hacer login (POST /api/login)"
+			},
+			"response": []
+		}
+	]
+}
